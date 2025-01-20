@@ -4,34 +4,35 @@ import 'package:gym/Treinos/TreinoProvider.dart';
 import 'package:provider/provider.dart';
 import 'package:numberpicker/numberpicker.dart';
 
-class Exerciciobox extends StatefulWidget {
+class Exercicioboxedit extends StatefulWidget {
   final String text;
-  final String id;
+  final num id;
   final bool checkstate;
-  const Exerciciobox({
+  const Exercicioboxedit({
     super.key,
     required this.text,
     required this.id,
-    this.checkstate = true,
+    this.checkstate = false,
   });
 
   @override
-  State<Exerciciobox> createState() => _ExercicioboxState();
+  State<Exercicioboxedit> createState() => _ExercicioboxeditState();
 }
 
-class _ExercicioboxState extends State<Exerciciobox> {
+class _ExercicioboxeditState extends State<Exercicioboxedit> {
   late bool _isCheck; // Estado local do Checkbox
   int _series = 1; // Valor inicial do NumberPicker
 
   @override
   void initState() {
     super.initState();
+
     _isCheck = widget.checkstate; // Inicializa o estado como falso ou valor passado
   }
 
   void _updateCheckbox(bool? value) {
     setState(() {
-      _isCheck = value ?? true; // Atualiza o estado local
+      _isCheck = value ?? false; // Atualiza o estado local
     });
 
     var provider = Provider.of<TreinoProvider>(context, listen: false);
@@ -39,18 +40,16 @@ class _ExercicioboxState extends State<Exerciciobox> {
     if (_isCheck) {
       // Adiciona o exercício ao ser marcado
       var obj = ExercicioObj(id: widget.id, nome: widget.text, series: _series);
-      provider.AddEx(obj.toJson());
+      provider.RmExEdit(obj);
     } else {
       // Remove o exercício ao ser desmarcado
       var obj = ExercicioObj(id: widget.id, nome: widget.text);
-      provider.RmEx(obj);
+      provider.AddExEdit(obj.toJson());
     }
   }
 
   @override
   Widget build(BuildContext context) {
-
-
     return Container(
       width: 300,
       height: 268,

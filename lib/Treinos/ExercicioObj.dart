@@ -1,7 +1,7 @@
 
 
 class ExercicioObj {
-  final String id;
+  final num id;
   final int series;
   final String nome;
 
@@ -13,7 +13,7 @@ class ExercicioObj {
     };
   }
 
-  ExercicioObj({required this.id, this.series = 1, required this.nome,});
+  ExercicioObj({required this.id, this.series = 1, required this.nome});
 
 
 }

@@ -6,12 +6,14 @@ import 'package:numberpicker/numberpicker.dart';
 
 class Exerciciobox extends StatefulWidget {
   final String text;
-  final String id;
+  final num id;
+  final String gif;
   final bool checkstate;
   const Exerciciobox({
     super.key,
     required this.text,
     required this.id,
+    required this.gif,
     this.checkstate = false,
   });
 
@@ -65,7 +67,7 @@ class _ExercicioboxState extends State<Exerciciobox> {
                 style: const TextStyle(fontSize: 10),
               ),
               Image.network(
-                "https://www.mundoboaforma.com.br/wp-content/uploads/2020/12/supino-reto.gif",
+                widget.gif,
                 width: 100,
                 height: 200,
               ),

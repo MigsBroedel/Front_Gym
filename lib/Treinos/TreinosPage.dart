@@ -24,10 +24,9 @@ Future <List<Map<String, dynamic>>> getTreinos(TreinoProvider treinoPro) async {
 
     try {
       var data = json.decode(response.body);
-      print(data);
 
       if (data is List) {
-        print("sucesso");
+
         treinoPro.ListWorkouts = List<Map<String, dynamic>>.from(data);
 
         return List<Map<String, dynamic>>.from(data);
@@ -67,7 +66,7 @@ class Treinospage extends StatelessWidget {
         builder: (context, snapshot) {
       if (snapshot.connectionState == ConnectionState.done) {
         var index = -1;
-        print(snapshot.data);
+       
         if (snapshot.data == []) {
           return Center(
             child: const Text("Sem treinos por enquanto..."),
@@ -75,18 +74,18 @@ class Treinospage extends StatelessWidget {
         }
         else {
           return Stack(
-            alignment: Alignment.center,
+            alignment: Alignment.topCenter,
             children: [
               SingleChildScrollView(
                 child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+                    //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
 
                       Column(
                           children: (snapshot.data?.map((item) {
                             index ++;
-                            print("item: ${item}");
+
                             return Treinobox(obj: item,);
                           }).toList()) ?? [Center(child: Text(snapshot.data.toString()),)]
                       ),
@@ -127,7 +126,8 @@ class Treinospage extends StatelessWidget {
       }
       if (snapshot.connectionState == ConnectionState.waiting) {
         print("Carregando...");
-        return CircularProgressIndicator();
+        return Center(
+            child: CircularProgressIndicator());
       }
       else {
         return Text("Erro");

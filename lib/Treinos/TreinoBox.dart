@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gym/Treinos/ExecutarTreino.dart';
+import 'package:gym/Treinos/ExecutarPage.dart';
 import 'package:gym/Treinos/TreinoProvider.dart';
 import '../Treinos/EditTreino.dart';
 import 'package:provider/provider.dart';
@@ -15,6 +15,7 @@ class Treinobox extends StatefulWidget {
 class _TreinoboxState extends State<Treinobox> {
   @override
   Widget build(BuildContext context) {
+    //print("OBJJJ:${widget.obj}");
     return GestureDetector(
       onTap: () {
         Navigator.push(context, MaterialPageRoute(builder: (context) => Edittreino(treino: widget.obj,)));

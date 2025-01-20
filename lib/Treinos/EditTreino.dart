@@ -7,6 +7,7 @@ import 'dart:convert';
 import '../Treinos/ExercicioBox.dart';
 import '../User/UserConfig.dart';
 import '../Treinos/TreinoProvider.dart';
+import '../Treinos/ExercicioBoxEdit.dart';
 
 
 // ao inves de mostrar apenas os exercicio sque tem no treino, mostrar todos com a possibilidade de add mais, talvez seja demorado verificar um por um, achar um jeito melhor
@@ -78,7 +79,7 @@ class _EdittreinoState extends State<Edittreino> {
     _descControl.text = widget.treino["desc"];
     var exercicioArr = widget.treino["exercicios"] ?? [];
     print("exercicioarr ${exercicioArr}");
-    Provider.of<TreinoProvider>(context, listen: false).ListExercises = exercicioArr;
+    Provider.of<TreinoProvider>(context, listen: false).ListExercisesEdit = exercicioArr;
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
@@ -151,8 +152,8 @@ class _EdittreinoState extends State<Edittreino> {
                           return Center(child: Text("No exercises"),);
                         }
                         else {
-                          return Exerciciobox(text: item['nome'] ?? "No name",
-                              id: item['_id'] ?? "", checkstate: true,);
+                          return Exercicioboxedit(text: item['nome'] ?? "No name",
+                              id: item['_id'] ?? "", checkstate: false,);
                         }
                       }).toList(),
                     ),
@@ -168,7 +169,7 @@ class _EdittreinoState extends State<Edittreino> {
                 children: [
                   GestureDetector(
                     onTap: () async {
-                      TreinoObj workout = TreinoObj(id: widget.treino["idtreino"], exercicios: exercicioArr, userId: widget.treino["userid"], nome: _nomeControl.text, desc: _descControl.text);
+                      TreinoObj workout = TreinoObj(id: widget.treino["idtreino"], exercicios: Provider.of<TreinoProvider>(context, listen: false).ListExercisesEdit, userId: widget.treino["userid"], nome: _nomeControl.text, desc: _descControl.text);
                       bool results = await PutTreino(workout);
                       CheckMethod(results, context);
                     },

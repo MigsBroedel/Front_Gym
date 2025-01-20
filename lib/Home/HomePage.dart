@@ -3,10 +3,11 @@ import 'SearchBox.dart';
 import 'InfoBoard.dart';
 import 'CategorySpace.dart';
 import 'AppBarHome.dart';
+import '../Analysis/Evolucao.dart';
+import '../Home/ExerciciosGuide.dart';
 
 
-
-const arrList = ["Metas do mês", "Calendário", "Sua evolução", "Recordes pessoais"];
+const List<Map<String, Widget>> arrList = [{"Sua evolução": Evolucao()}, {"Exercicios": Exerciciosguide()}];
 
 class Homepage extends StatelessWidget {
   const Homepage({super.key});
@@ -23,20 +24,22 @@ class Homepage extends StatelessWidget {
             backgroundColor: Colors.white,
             title: Appbarhome()
         ),
-        body: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [Searchbox(),
-              Categoryspace(),
+        body: SingleChildScrollView(
+          child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [Searchbox(),
+                Categoryspace(),
 
-              Transform.translate(offset: Offset(0, 20), child: Wrap(
-                spacing: 26,
-                runSpacing: 20,
-                children: arrList.map((item) {
-                  return Infoboard(item: item);
-                }, ).toList(),)
+                Transform.translate(offset: Offset(0, 20), child: Wrap(
+                  spacing: 26,
+                  runSpacing: 20,
+                  children: arrList.map((item) {
+                    return Infoboard(item: item);
+                  }, ).toList(),)
                 ),
-        ]
-        ),
+              ]
+          ),
+        )
       ),
     );
   }

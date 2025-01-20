@@ -163,7 +163,7 @@ class _AddtreinopageState extends State<Addtreinopage> {
                   runSpacing: 1,
                   alignment: WrapAlignment.start,
                   children: API.exercises.map((item) {
-                    return Exerciciobox(text: item['nome'] ?? "No name", id: item['_id'] ?? "");
+                    return Exerciciobox(text: item["nome"] ?? "no name", id: item['_id'] ?? 0, gif: item['gif'] ?? "");
                   }).toList() ?? [],
                 ),
         ]),
